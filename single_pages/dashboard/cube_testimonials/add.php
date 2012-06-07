@@ -3,7 +3,7 @@ defined('C5_EXECUTE') or die("Access Denied.");
 $th = Loader::helper('text');
 ?>
 
-<?php if($editmode): ?>
+<?php if($tID): ?>
 <?php echo Loader::helper('concrete/dashboard')->getDashboardPaneHeaderWrapper(t('Edit Testimonial'), false, false, false);?>
 <?php else: ?>
 <?php echo Loader::helper('concrete/dashboard')->getDashboardPaneHeaderWrapper(t('Add Testimonial'), false, false, false);?>
