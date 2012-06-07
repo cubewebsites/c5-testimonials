@@ -3,6 +3,7 @@
 	<table name="cube_testimonials">
 		<field name="testimonial_id" type="I">
 			<key />
+			<autoincrement />
 			<unsigned />
 		</field>
 		<field name="display_order" type="I"></field>
