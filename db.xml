@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<schema version="0.3">
+	<table name="cube_testimonials">
+		<field name="testimonial_id" type="I">
+			<key />
+			<unsigned />
+		</field>
+		<field name="display_order" type="I"></field>
+		<field name="title" type="C" size="255"></field>
+		<field name="author" type="C" size="255"></field>
+		<field name="department" type="C" size="255"></field>
+		<field name="quote" type="X"></field>
+		<field name="url" type="C" size="255"></field>
+	</table>
+</schema>
