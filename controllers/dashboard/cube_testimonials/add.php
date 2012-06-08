@@ -1,5 +1,7 @@
 <?php
-Loader::model('testimonials','cube_testimonials');
+defined('C5_EXECUTE') or die("Access Denied.");
+
+Loader::model('testimonials_list','cube_testimonials');
 class DashboardCubeTestimonialsAddController extends Controller {
 
 	public function on_start() {
@@ -14,16 +16,19 @@ class DashboardCubeTestimonialsAddController extends Controller {
 	public function view() {
 		$fh =   Loader::helper('form');
 
-		$testimonials   =   new Testimonials();
+		$testimonials   =   new TestimonialsList();
+		// Fetch testimonial if ID specified
 		if($fh->getRequestValue('tID')) {
 			$testimonial    =   $testimonials->fetchByID($fh->getRequestValue('tID'));
 			if($testimonial) {
 				$this->set('tID',$testimonial['testimonial_id']);
 			}
+			// Exit if not found
 			else {
 				$this->redirect('/dashboard/cube_testimonials/add?t-unavailable=1');
 			}
 		}
+		// Create new testimonial if none specified
 		else {
 			$testimonial    =   $testimonials->createRow();
 		}
@@ -54,11 +59,14 @@ class DashboardCubeTestimonialsAddController extends Controller {
 				);
 				foreach($data as $k=>$v)
 					$testimonial[$k]    =   $v;
+				// Save
 				$testimonial    =   $testimonials->saveTestimonial($testimonial);
+				// Save successful
 				if($testimonial) {
 					// Redirect to the saved testimonial
 					$this->redirect('/dashboard/cube_testimonials/add?tID=' . $testimonial['testimonial_id'] . '&t-saved=1');
 				}
+				// Save fail
 				else {
 					// Display error
 					$this->error->add(t('An error occured when saving the testimonial.  Please try again.'));
@@ -67,12 +75,14 @@ class DashboardCubeTestimonialsAddController extends Controller {
 
 		}
 
-		// Show any required message
+		// Show save message
 		if($fh->getRequestValue('t-saved'))
 			$this->set('message', t('Testimonial saved successfully.'));
-		// Show any required message
+		// Show not found message
 		elseif($fh->getRequestValue('t-unavailable'))
 			$this->error->add(t('Unable to find the selected testimonial'));
+
+		// Setup view
 		$this->set('testimonial',$testimonial);
 		$this->set('error',$this->error);
 	}
