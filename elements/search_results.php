@@ -94,7 +94,7 @@
 
 	<?php  } else { ?>
 		
-		<div id="ccm-list-none"><?php echo t('No users found.')?></div>
+		<div id="ccm-list-none"><?php echo t('No testimonials found.')?></div>
 		
 	
 	<?php  }  ?>
