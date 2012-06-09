@@ -28,7 +28,7 @@
 		<a href="<?php echo View::url('/dashboard/cube_testimonials/add')?>" style="float: right" class="btn primary"><?php echo t("Add Testimonial")?></a>
 		<select id="ccm-<?php echo $searchInstance?>-list-multiple-operations" class="span3" disabled>
 					<option value="">** <?php echo t('With Selected')?></option>
-					<option value="properties"><?php echo t('Edit Properties')?></option>
+					<option value="delete"><?php echo t('Delete')?></option>
 				<?php  if ($mode == 'choose_multiple') { ?>
 					<option value="choose"><?php echo t('Choose')?></option>
 				<?php  } ?>
@@ -44,9 +44,9 @@
 	$uh->getToolsURL('search_results','cube_testimonials');
 	
 	if (count($users) > 0) { ?>	
-		<table border="0" cellspacing="0" cellpadding="0" id="ccm-user-list" class="ccm-results-list">
+		<table border="0" cellspacing="0" cellpadding="0" id="ccm-testimonial-list" class="ccm-results-list">
 		<tr>
-			<th width="1"><input id="ccm-user-list-cb-all" type="checkbox" /></th>
+			<th width="1"><input id="ccm-testimonial-list-cb-all" type="checkbox" /></th>
 			<?php  foreach($columns->getColumns() as $col) { ?>
 				<?php  if ($col->isColumnSortable()) { ?>
 					<th class="<?php echo $userList->getSearchResultsClass($col->getColumnKey())?>"><a href="<?php echo $userList->getSortByURL($col->getColumnKey(), $col->getColumnDefaultSortDirection(), $bu, $soargs)?>"><?php echo $col->getColumnName()?></a></th>
@@ -73,7 +73,7 @@
 			?>
 		
 			<tr class="ccm-list-record <?php echo $striped?>">
-			<td class="ccm-user-list-cb" style="vertical-align: middle !important"><input type="checkbox" value="<?php echo $ui->getTestimonialID() ?>" /></td>
+			<td class="ccm-testimonial-list-cb" style="vertical-align: middle !important"><input type="checkbox" value="<?php echo $ui->getTestimonialID() ?>" /></td>
 			<?php  foreach($columns->getColumns() as $col) { ?>
 				<?php  if ($col->getColumnKey() == 'title') { ?>
 					<td><a href="<?php echo $action?>"><?php echo $ui->getTitle()?></a></td>
@@ -122,6 +122,6 @@
 
 <script type="text/javascript">
 $(function() { 
-	ccm_setupUserSearch(); 
+	ccm_setupTestimonialSearch();
 });
 </script>

@@ -2,7 +2,7 @@
 defined('C5_EXECUTE') or die("Access Denied.");
 Loader::model('testimonials_list','cube_testimonials');
 
-class DashboardCubeTestimonialsController extends Controller {
+class DashboardCubeTestimonialsManageController extends Controller {
 	public function on_start() {
 
 	}
@@ -12,7 +12,7 @@ class DashboardCubeTestimonialsController extends Controller {
 		$html = Loader::helper('html');
 		$form = Loader::helper('form');
 		$this->set('form', $form);
-		//$this->addHeaderItem('<script type="text/javascript">$(function() { ccm_setupAdvancedSearch(\'user\'); });</script>');
+		$this->addHeaderItem($html->javascript('dashboard.testimonial.js','cube_testimonials'));
 		$tl             = $this->getRequestedSearchResults();
 		$testimonials   = $tl->getPage();
 

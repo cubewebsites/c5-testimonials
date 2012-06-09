@@ -26,8 +26,13 @@ class CubeTestimonialsPackage extends Package {
 		$sp =   SinglePage::add('dashboard/cube_testimonials',$pkg);
 		$sp->update(array('cName'=>t('Cube Testimonials'),'cDescription'=>t('Manage Testimonials')));
 
+		// Install the single pages for admin
+		Loader::model('single_page');
+		$sp =   SinglePage::add('dashboard/cube_testimonials/manage',$pkg);
+		$sp->update(array('cName'=>t('Manage Testimonials'),'cDescription'=>t('Manage Testimonials'),'cDisplayOrder'=>1));
+
 		$sp =   SinglePage::add('dashboard/cube_testimonials/add',$pkg);
-		$sp->update(array('cName'=>t('Add Testimonial'),'cDescription'=>t('Add / Edit Testimonial')));
+		$sp->update(array('cName'=>t('Add Testimonial'),'cDescription'=>t('Add / Edit Testimonial'),'cDisplayOrder'=>2));
 
 
 	}
