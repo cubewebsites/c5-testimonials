@@ -3,6 +3,7 @@
 <?php 
 	$txt = Loader::helper('text');
 	$uh    = Loader::helper('concrete/urls');
+	$fh	=	Loader::helper('form');
 ?>
 
 <div id="ccm-user-search-results">
@@ -40,6 +41,7 @@
 					<option value="choose"><?php echo t('Choose')?></option>
 				<?php  } ?>
 		</select>
+		<?php echo $fh->submit('operate-testimonials','Go',array('disabled'=>'disabled'),'primary') ?>
 	</div>
 
 	<?php 	

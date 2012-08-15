@@ -7,14 +7,16 @@ ccm_setupTestimonialSearch = function() {
 			$("#ccm-testimonial-list-multiple-operations").attr('disabled', false);
 		} else {
 			$('.ccm-list-record td.ccm-testimonial-list-cb input[type=checkbox]').attr('checked', false);
-			$("#ccm-testimonial-list-multiple-operations").attr('disabled', true);
+			$("#ccm-testimonial-list-multiple-operations").val('').attr('disabled', true);
+			$('#operate-testimonials').attr('disabled',true);	
 		}
 	});
 	$("td.ccm-testimonial-list-cb input[type=checkbox]").click(function(e) {
 		if ($("td.ccm-testimonial-list-cb input[type=checkbox]:checked").length > 0) {
 			$("#ccm-testimonial-list-multiple-operations").attr('disabled', false);
 		} else {
-			$("#ccm-testimonial-list-multiple-operations").attr('disabled', true);
+			$("#ccm-testimonial-list-multiple-operations").val('').attr('disabled', true);
+			$('#operate-testimonials').attr('disabled',true);	
 		}
 	});
 
@@ -39,33 +41,12 @@ ccm_setupTestimonialSearch = function() {
 		// perform an action
 		switch(action) {
 			case 'delete':								
-				// submit a delete request
-				$.ajax({
-					url		:	testimonialSearchURL,
-					cache		:	false,
-					dataType	:	'json',
-					data		:	dataForRequest,
-					success	:	function(data) {
-						ccmAlert.hud(data.message,2000, 'add', data.message);
-						alert(data.tID[0]);
-						for(var tid in data.tID) {
-							
-						}
-						$('#ccm-user-search-results').replaceWith(data.results);
-					},
-					error		:	function(data) {
-						
-					}
-				})
-				
-				// if it works out then out with the old. in with the new
-				
-				// it doesn't, well it's nice to let people know :)'
-				
-				
-				$(this).parents('form').hide().submit();
-				
+				// enable the submit button
+				$('#operate-testimonials').removeAttr('disabled');
 				break;
+			
+			default:
+				$('#operate-testimonials').addAttr('disabled');	
 		}
 		return false;		
 	});
