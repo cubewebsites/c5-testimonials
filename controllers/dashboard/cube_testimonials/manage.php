@@ -26,6 +26,10 @@ class DashboardCubeTestimonialsManageController extends Controller {
 		$this->set('testimonialList', $tl);
 		$this->set('testimonials', $testimonials);
 		$this->set('pagination', $tl->getPagination());
+		
+		if($form->getRequestValue('t-deleted'))
+			$this->set('message', t('Testimonial deleted successfully.'));
+		
 	}
 
 	/**

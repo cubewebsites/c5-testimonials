@@ -40,8 +40,7 @@ class DashboardCubeTestimonialsAddController extends Controller {
 			if($fh->getRequestValue('ccm-submit-ccm-testimonial-delete','post')) {
 				if($testimonial->getID()) {
 					$testimonial->delete();
-					$this->set('message', t('Testimonial delete successfully.'));
-					$this->redirect('/dashboard/cube_testimonials/manage');
+					$this->redirect('/dashboard/cube_testimonials/manage?t-deleted=1');
 				}
 			}
 			
