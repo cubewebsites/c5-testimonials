@@ -2,6 +2,6 @@
 
 <?php echo Loader::helper('concrete/dashboard')->getDashboardPaneHeaderWrapper(t('Cube Testimonials'), t('Manage testimonials on your site and perform bulk actions on them.'), false, false);?>
 
-<?php  Loader::packageElement('search_results', 'cube_testimonials' ,array('columns' => $columns, 'searchInstance' => $searchInstance, 'searchType' => 'DASHBOARD', 'users' => $testimonials, 'userList' => $testimonialList, 'pagination' => $pagination)); ?>
+<?php  Loader::packageElement('search_results', 'cube_testimonials' ,array('columns' => $columns, 'searchInstance' => $searchInstance, 'searchType' => 'DASHBOARD', 'testimonials' => $testimonials, 'testimonialList' => $testimonialList, 'pagination' => $pagination)); ?>
 
 <?php echo Loader::helper('concrete/dashboard')->getDashboardPaneFooterWrapper(false); ?>

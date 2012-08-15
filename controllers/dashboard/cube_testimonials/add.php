@@ -21,7 +21,7 @@ class DashboardCubeTestimonialsAddController extends Controller {
 		if($fh->getRequestValue('tID')) {
 			$testimonial    =   $testimonials->fetchByID($fh->getRequestValue('tID'));
 			if($testimonial) {
-				$this->set('tID',$testimonial['testimonial_id']);
+				$this->set('tID',$testimonial->getTestimonialID());
 			}
 			// Exit if not found
 			else {
@@ -32,7 +32,7 @@ class DashboardCubeTestimonialsAddController extends Controller {
 		else {
 			$testimonial    =   $testimonials->createRow();
 		}
-
+		
 		// Handle form submission
 		if($_POST['save']) {
 
@@ -42,36 +42,30 @@ class DashboardCubeTestimonialsAddController extends Controller {
 			$department =   $fh->getRequestValue('department');
 			$url        =   $fh->getRequestValue('url');
 			$quote      =   $fh->getRequestValue('quote');
-
-			// Validation
-			if(!$title)			$this->error->add(t('Please enter a title'));
-			if(!$quote)         $this->error->add(t('Please enter a testimonial'));
-
-			// Save if validation passed
-			if(!$this->error->has()) {
-				$data   =   array(
+			
+			$data   =   array(
 					'title'         =>  $title,
 					'author'        =>  $author,
 					'department'    =>  $department,
 					'url'           =>  $url,
 					'quote'         =>  $quote,
 					'display_order' =>  0
-				);
-				foreach($data as $k=>$v)
-					$testimonial[$k]    =   $v;
-				// Save
-				$testimonial    =   $testimonials->saveTestimonial($testimonial);
-				// Save successful
-				if($testimonial) {
-					// Redirect to the saved testimonial
-					$this->redirect('/dashboard/cube_testimonials/add?tID=' . $testimonial['testimonial_id'] . '&t-saved=1');
-				}
-				// Save fail
-				else {
-					// Display error
-					$this->error->add(t('An error occured when saving the testimonial.  Please try again.'));
-				}
+			);
+			foreach($data as $k=>$v)
+				$testimonial->setData($k,$v);
+						
+			// Save successful
+			if($testimonial->save()) {						
+				// Redirect to the saved testimonial
+				$this->redirect('/dashboard/cube_testimonials/add?tID=' . $testimonial->getID() . '&t-saved=1');
 			}
+			// Save fail
+			else {
+				// Display error
+				foreach($testimonial->getErrors() as $k => $v) {
+					$this->error->add($v);
+				}
+			}			
 
 		}
 

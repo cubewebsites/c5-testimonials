@@ -11,7 +11,14 @@ class DashboardCubeTestimonialsManageController extends Controller {
 
 		$html = Loader::helper('html');
 		$form = Loader::helper('form');
+		$urls = Loader::helper('concrete/urls');
 		$this->set('form', $form);
+        $this->addHeaderItem('<script type="text/javascript">
+            var CUBE_TESTIMONIALS_TOOLS_DIR =   "'.$urls->getToolsUrl('','cube_testimonials').'";
+			var cube_testimonials_i18n	=    {
+				delete_dialog_title : "'.t('Delete Testimonials').'"
+			};
+        </script>');
 		$this->addHeaderItem($html->javascript('dashboard.testimonial.js','cube_testimonials'));
 		$tl             = $this->getRequestedSearchResults();
 		$testimonials   = $tl->getPage();
@@ -27,6 +34,7 @@ class DashboardCubeTestimonialsManageController extends Controller {
 	public function getRequestedSearchResults() {
 
 		$tl =   new TestimonialsList();
+		$tl->setItemsPerPage(20);
 		$tl->sortBy('display_order','desc');
 
 		$columns = TestimonialSearchColumnSet::getCurrent();

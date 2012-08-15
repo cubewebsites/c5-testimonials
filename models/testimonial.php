@@ -1,41 +1,36 @@
 <?php
 defined('C5_EXECUTE') or die("Access Denied.");
+Loader::model('cube_object','cube_testimonials');
 Loader::model('testimonials_list','cube_testimonials');
 
-class Testimonial extends Object {
+class Testimonial extends Cube_Object {
 
-	public static function getByTestimonialID($tID) {
-		$list   =   new TestimonialsList();
-		$row    =   $list->fetchByID($tID);
-		$testimonial    =   new Testimonial();
+	protected$_table   =   'cube_testimonials';
+	//protected $_idFieldName = 'testimonial_id';
+	
+	const primary =   'testimonial_id';
+	
+	public static function getByTestimonialID($tID) {		
+		$testimonial    =   new Testimonial();		
+		$db     =   Loader::db();
+		$qry    =   "SELECT * FROM ". $testimonial->getTableName() ." WHERE ".$testimonial->getIdFieldName()."=?";
+		$row	=	 $db->GetRow($qry,array($tID));		
+		
 		if(!$row)
 			return $testimonial;
 		foreach($row as $k=>$v)
-			$testimonial->$k    =   $v;
+			$testimonial->setData ($k, $v);
 		return $testimonial;
 	}
 
 	public function getTestimonialID() {
-		return $this->testimonial_id;
+		return $this->getId();
+	}
+	
+	protected function _validate() {		
+		if(!$this->getTitle())	$this->addError(t('Please enter a title'),'title');
+		if(!$this->getQuote())	$this->addError(t('Please enter a testimonial'),'testimonial');	
 	}
 
-	public function getTitle() {
-		return $this->title;
-	}
-
-	public function getAuthor() {
-		return $this->author;
-	}
-
-	public function getDepartment() {
-		return $this->department;
-	}
-
-	public function getQuote() {
-		return $this->quote;
-	}
-
-	public function getDisplayOrder() {
-		return $this->display_order;
-	}
+	
 }

@@ -8,5 +8,3 @@ class DashboardCubeTestimonialsController extends Controller {
 
 
 }
-
-?>

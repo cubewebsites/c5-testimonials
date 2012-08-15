@@ -21,26 +21,53 @@ ccm_setupTestimonialSearch = function() {
 	// if we're not in the dashboard, add to the multiple operations select menu
 
 	$("#ccm-testimonial-list-multiple-operations").change(function() {
-		var action = $(this).val();
+		$this	=	$(this);
+		var action = $this.val();
+		
+		// get the ids of the testimonials to operate on
+		tIDstring = '';
+		tIDobj	=	[];
+		$("td.ccm-testimonial-list-cb input[type=checkbox]:checked").each(function() {
+			tIDstring=tIDstring+'&tID[]='+$(this).val();
+			tIDobj.push($(this).val());
+		});
+		
+		var dataForRequest		=	testimonialURLParams;
+		dataForRequest['action']	=	action;
+		dataForRequest['tID']		=	tIDobj;
+		
+		// perform an action
 		switch(action) {
-			case "delete":
-				uIDstring = '';
-				$("td.ccm-testimonial-list-cb input[type=checkbox]:checked").each(function() {
-					uIDstring=uIDstring+'&uID[]='+$(this).val();
-				});
-				if(confirm('Are you sure?')) {
-					jQuery.fn.dialog.open({
-						width: 630,
-						height: 450,
-						modal: false,
-						href: CCM_TOOLS_PATH + '/testimonials/bulk_properties?' + uIDstring,
-						title: ccmi18n.properties
-					});
-				}
+			case 'delete':								
+				// submit a delete request
+				$.ajax({
+					url		:	testimonialSearchURL,
+					cache		:	false,
+					dataType	:	'json',
+					data		:	dataForRequest,
+					success	:	function(data) {
+						ccmAlert.hud(data.message,2000, 'add', data.message);
+						alert(data.tID[0]);
+						for(var tid in data.tID) {
+							
+						}
+						$('#ccm-user-search-results').replaceWith(data.results);
+					},
+					error		:	function(data) {
+						
+					}
+				})
+				
+				// if it works out then out with the old. in with the new
+				
+				// it doesn't, well it's nice to let people know :)'
+				
+				
+				$(this).parents('form').hide().submit();
+				
 				break;
 		}
-
-		$(this).get(0).selectedIndex = 0;
+		return false;		
 	});
 
 

@@ -26,8 +26,8 @@ $th = Loader::helper('text');
 				<td><?php echo t('Author')?></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="title" autocomplete="off" value="<?php echo $th->entities($testimonial['title'])?>" style="width: 95%"></td>
-				<td><input type="text" autocomplete="off" name="author" value="<?php echo $th->entities($testimonial['author'])?>" style="width: 95%"></td>
+				<td><input type="text" name="title" autocomplete="off" value="<?php echo $th->entities($testimonial->getTitle())?>" style="width: 95%"></td>
+				<td><input type="text" autocomplete="off" name="author" value="<?php echo $th->entities($testimonial->getAuthor())?>" style="width: 95%"></td>
 			</tr>
 
 			<tr>
@@ -35,15 +35,15 @@ $th = Loader::helper('text');
 				<td><?php echo t('URL')?></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="department" autocomplete="off" value="<?php echo $th->entities($testimonial['department'])?>" style="width: 95%"></td>
-				<td><input type="text" autocomplete="off" name="url" value="<?php echo $th->entities($testimonial['url'])?>" style="width: 95%"></td>
+				<td><input type="text" name="department" autocomplete="off" value="<?php echo $th->entities($testimonial->getDepartment())?>" style="width: 95%"></td>
+				<td><input type="text" autocomplete="off" name="url" value="<?php echo $th->entities($testimonial->getUrl())?>" style="width: 95%"></td>
 			</tr>
 
 			<tr>
 				<td colspan="2"><?php echo t('Testimonial')?> <span class="required">*</span></td>
 			</tr>
 			<tr>
-				<td colspan="2"><textarea name="quote" style="width: 95%" cols="=100" rows="5"><?php echo $th->entities($testimonial['quote'])?></textarea></td>
+				<td colspan="2"><textarea name="quote" style="width: 95%" cols="=100" rows="5"><?php echo $th->entities($testimonial->getQuote())?></textarea></td>
 			</tr>
 
 
