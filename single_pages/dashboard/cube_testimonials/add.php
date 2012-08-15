@@ -56,11 +56,23 @@ $th = Loader::helper('text');
 			<?php if($tID): ?>
 			<input type="hidden" name="tID" value="<?php echo $tID ?>" />
 			<?php endif ?>
-			<input type="hidden" name="save" value="1" />
+			<input type="hidden" name="save" value="1" />			
 			<?php  print $ih->submit(t('Save Testimonial'), 'ccm-testimonial-form', 'right', 'primary'); ?>
+			<?php if($testimonial->getID()): ?>
+			<?php  print $ih->submit(t('Delete Testimonial'), 'ccm-testimonial-delete', 'right', 'danger'); ?>
+			<?php endif ?>
 		</div>
 	</div>
 
 </form>
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#ccm-submit-ccm-testimonial-delete').click(function(){
+			return confirm("<?php echo t('Are you sure you want to delete this testimonial?') ?>");
+		});
+	});
+</script>
 
 <?php echo Loader::helper('concrete/dashboard')->getDashboardPaneFooterWrapper(false);?>
