@@ -1,11 +1,11 @@
 $(document).ready(function(){
 	function setupTestimonialSelector() {
-		var showall =   $('#show_all').val();
-		if(showall) {
+		var showall =   $('#show_all').val();                
+		if(showall==1) {
 			$('#testimonial_selector').hide();
 		}
 		else {
-			$('#testimonial_selector').hide();
+			$('#testimonial_selector').show();
 		}
 	}
 
