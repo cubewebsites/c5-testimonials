@@ -27,6 +27,11 @@
 
 	?>
 
+    <?php  if ($searchType == 'DASHBOARD'): ?>
+    <form action="<?php echo $this->url('/dashboard/cube_testimonials/manage') ?>" method="post">
+     <?php endif ?>
+    
+    
 <div id="ccm-list-wrapper"><a name="ccm-<?php echo $searchInstance?>-list-wrapper-anchor"></a>
 
 	<div style="margin-bottom: 10px">
@@ -34,7 +39,7 @@
 
 		<a href="<?php echo View::url('/dashboard/cube_testimonials/add')?>" style="float: right" class="btn primary"><?php echo t("Add Testimonial")?></a>
 		
-		<select id="ccm-<?php echo $searchInstance?>-list-multiple-operations" class="span3" disabled>
+		<select name="testimonial-operation" id="ccm-<?php echo $searchInstance?>-list-multiple-operations" class="span3" disabled>
 					<option value="">** <?php echo t('With Selected')?></option>
 					<option value="delete"><?php echo t('Delete')?></option>
 				<?php  if ($mode == 'choose_multiple') { ?>
@@ -79,10 +84,12 @@
 			?>
 		
 			<tr class="ccm-list-record <?php echo $striped?>">
-			<td class="ccm-testimonial-list-cb" style="vertical-align: middle !important"><input type="checkbox" value="<?php echo $_t->getTestimonialID() ?>" /></td>
-			<?php  foreach($columns->getColumns() as $col) { ?>
+			<td class="ccm-testimonial-list-cb" style="vertical-align: middle !important"><input name="tID[]" type="checkbox" value="<?php echo $_t->getTestimonialID() ?>" /></td>
+			<?php  foreach($columns->getColumns() as $col) { ?>                        
 				<?php  if ($col->getColumnKey() == 'title') { ?>
 					<td><a href="<?php echo $action?>"><?php echo $_t->getTitle()?></a></td>
+                               <?php  } elseif ($col->getColumnKey() == 'display_order') { ?>
+                                        <td><input name="tDisplayOrder[<?php echo $_t->getTestimonialID() ?>]" type="text" value="<?php echo $_t->getDisplayOrder() ?>" /></td>
 				<?php  } else { ?>
 					<td><?php echo $col->getColumnValue($_t)?></td>
 				<?php  } ?>
@@ -95,7 +102,7 @@
 	?>
 	
 	</table>
-	
+	<?php echo $fh->submit('save-testimonials','Save',array(),'success') ?>
 	
 
 	<?php  } else { ?>
@@ -106,6 +113,10 @@
 	<?php  }  ?>
 
 </div>
+        
+    <?php  if ($searchType == 'DASHBOARD'): ?>
+    </form>
+    <?php endif ?>
 
 <?php 
 	$testimonialList->displaySummary();

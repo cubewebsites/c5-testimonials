@@ -41,12 +41,12 @@ ccm_setupTestimonialSearch = function() {
 		// perform an action
 		switch(action) {
 			case 'delete':								
-				// enable the submit button
-				$('#operate-testimonials').removeAttr('disabled');
+				// enable the submit button			                                
+                                $('#operate-testimonials').removeAttr('disabled');
 				break;
 			
 			default:
-				$('#operate-testimonials').addAttr('disabled');	
+				$('#operate-testimonials').attr('disabled',true);	
 		}
 		return false;		
 	});
