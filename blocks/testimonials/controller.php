@@ -1,4 +1,5 @@
 <?php
+Loader::model('testimonials_list','cube_testimonials');
 
 class TestimonialsBlockController extends BlockController {
 
@@ -23,11 +24,35 @@ class TestimonialsBlockController extends BlockController {
 		return t("Testimonials");
 	}
 
-	function save($data) {
+	public function save($data) {
+                $args['show_all']       =   $data['show_all']==1?1:0;                            
 		$args['testimonials']   =   is_array($data['testimonials']) ?   $data['testimonials']   :   array();
+                $args['testimonials']   =   serialize($args['testimonials']);
 		$args['title']          =   (String)$data['title'];
 		$args['random']         =   $data['random']==1  ?   1   :   0;
 		parent::save($args);
 	}
+        
+        public function add() {
+            $this->_setupForm();
+        }
+        
+        public function edit() {
+            $this->_setupForm();
+        }
+        
+        protected function _setupForm() {
+            $tl = new TestimonialsList();            
+            $this->set('testimonial_objs',$tl->get());
+            
+            // Set the testimonial ids
+            $ts = $this->get('testimonials');
+            $ts = unserialize($ts);
+            if(is_array($ts))
+                $this->set('testimonial_ids',$ts);
+            else
+                $this->set('testimonial_ids',array());
+            
+        }
 
 }
