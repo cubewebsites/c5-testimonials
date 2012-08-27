@@ -1,7 +1,6 @@
 <?php defined('C5_EXECUTE') or die("Access Denied."); ?>
 <?php
 $th = Loader::helper('text');
-$th = new TextHelper();
 ?>
 <div class="block block-testimonials">
     <?php if($title): ?>

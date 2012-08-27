@@ -1,4 +1,5 @@
 <?php
+defined('C5_EXECUTE') or die("Access Denied.");
 Loader::model('testimonial','cube_testimonials');
 
 class TestimonialsList extends DatabaseItemList {
