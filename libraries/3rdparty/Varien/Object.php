@@ -1,6 +1,4 @@
 <?php
-defined('C5_EXECUTE') or die("Access Denied.");
-Loader::model('exception','cube_testimonials');
 /**
  * Magento
  *
@@ -34,6 +32,7 @@ Loader::model('exception','cube_testimonials');
  * @package    Varien_Object
  * @author      Magento Core Team <core@magentocommerce.com>
  */
+include_once 'Exception.php';
 class Varien_Object implements ArrayAccess
 {
 
