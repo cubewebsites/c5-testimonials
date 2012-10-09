@@ -44,7 +44,10 @@ class TestimonialsBlockController extends BlockController {
 					$tl->filter ('testimonial_id',$ids, 'IN');
 				
 			}
-            $this->set('testimonials',$tl->get());
+
+			// Set the limit
+			$limit = $this->get('testimonial_limit') ? $this->get('testimonial_limit') : 0;
+			$this->set('testimonials',$tl->get($limit));
             
         }
 
@@ -54,6 +57,7 @@ class TestimonialsBlockController extends BlockController {
         $args['testimonials']   =   serialize($args['testimonials']);
 		$args['title']          =   (String)$data['title'];
 		$args['random']         =   $data['random']==1  ?   1   :   0;
+		$args['testimonial_limit']  =   $data['testimonial_limit']  ?   (int)$data['testimonial_limit']   :   0;
 		parent::save($args);
 	}
         
