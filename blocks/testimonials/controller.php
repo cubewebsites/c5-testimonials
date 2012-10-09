@@ -36,16 +36,22 @@ class TestimonialsBlockController extends BlockController {
             $this->get('random') ? $tl->sortBy ('RAND()', 'asc') : $tl->sortBy ('display_order','asc');
             
             // Filter by ID if needed
-            if(!$this->get('show_all'))
-                $tl->filter ('testimonial_id',$this->_getSelectedTestimonialIDs (), 'IN');
+            if(!$this->get('show_all')) {
+				// Make sure testimonials are selected
+				// If none selected then they are all displayed
+				$ids	=	$this->_getSelectedTestimonialIDs ();
+				if(count($ids))
+					$tl->filter ('testimonial_id',$ids, 'IN');
+				
+			}
             $this->set('testimonials',$tl->get());
             
         }
 
 	public function save($data) {
-                $args['show_all']       =   $data['show_all']==1?1:0;                            
+        $args['show_all']       =   $data['show_all']==1?1:0;                            
 		$args['testimonials']   =   is_array($data['testimonials']) ?   $data['testimonials']   :   array();
-                $args['testimonials']   =   serialize($args['testimonials']);
+        $args['testimonials']   =   serialize($args['testimonials']);
 		$args['title']          =   (String)$data['title'];
 		$args['random']         =   $data['random']==1  ?   1   :   0;
 		parent::save($args);
