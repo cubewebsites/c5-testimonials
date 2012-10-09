@@ -8,6 +8,7 @@
 		<field name="title" type="C" size="255"></field>
 		<field name="testimonials" type="X"></field>
 		<field name="random" type="L"></field>
-                <field name="show_all" type="L"></field>
+        <field name="show_all" type="L"></field>
+		<field name="testimonial_limit" type="I"></field>
 	</table>
 </schema>
