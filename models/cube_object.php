@@ -1,6 +1,6 @@
 <?php
 defined('C5_EXECUTE') or die("Access Denied.");
-Loader::model('object','cube_testimonials');
+Loader::library('3rdparty/Varien/Object','cube_testimonials');
 class Cube_Object extends Varien_Object {
 	
 	protected $_table	=null;
