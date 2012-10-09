@@ -1,6 +1,7 @@
 <?php
+
 defined('C5_EXECUTE') or die("Access Denied.");
-Loader::model('testimonials_list','cube_testimonials');
+Loader::model('testimonials_list', 'cube_testimonials');
 
 class TestimonialsBlockController extends BlockController {
 
@@ -24,64 +25,62 @@ class TestimonialsBlockController extends BlockController {
 	public function getBlockTypeName() {
 		return t("Testimonials");
 	}
-        
-        public function view() {
-            
-            // Set the title
-            $this->set('title',$this->get('title'));            
-            
-            $tl =   new TestimonialsList();
-            
-            // Set the order of resultss            
-            $this->get('random') ? $tl->sortBy ('RAND()', 'asc') : $tl->sortBy ('display_order','asc');
-            
-            // Filter by ID if needed
-            if(!$this->get('show_all')) {
-				// Make sure testimonials are selected
-				// If none selected then they are all displayed
-				$ids	=	$this->_getSelectedTestimonialIDs ();
-				if(count($ids))
-					$tl->filter ('testimonial_id',$ids, 'IN');
-				
-			}
 
-			// Set the limit
-			$limit = $this->get('testimonial_limit') ? $this->get('testimonial_limit') : 0;
-			$this->set('testimonials',$tl->get($limit));
-            
-        }
+	public function view() {
+
+		// Set the title
+		$this->set('title', $this->get('title'));
+
+		$tl = new TestimonialsList();
+
+		// Set the order of resultss            
+		$this->get('random') ? $tl->sortBy('RAND()', 'asc') : $tl->sortBy('display_order', 'asc');
+
+		// Filter by ID if needed
+		if (!$this->get('show_all')) {
+			// Make sure testimonials are selected
+			// If none selected then they are all displayed
+			$ids = $this->_getSelectedTestimonialIDs();
+			if (count($ids))
+				$tl->filter('testimonial_id', $ids, 'IN');
+		}
+
+		// Set the limit
+		$limit = $this->get('testimonial_limit') ? $this->get('testimonial_limit') : 0;
+		$this->set('testimonials', $tl->get($limit));
+	}
 
 	public function save($data) {
-        $args['show_all']       =   $data['show_all']==1?1:0;                            
-		$args['testimonials']   =   is_array($data['testimonials']) ?   $data['testimonials']   :   array();
-        $args['testimonials']   =   serialize($args['testimonials']);
-		$args['title']          =   (String)$data['title'];
-		$args['random']         =   $data['random']==1  ?   1   :   0;
-		$args['testimonial_limit']  =   $data['testimonial_limit']  ?   (int)$data['testimonial_limit']   :   0;
+		$args['show_all'] = $data['show_all'] == 1 ? 1 : 0;
+		$args['testimonials'] = is_array($data['testimonials']) ? $data['testimonials'] : array();
+		$args['testimonials'] = serialize($args['testimonials']);
+		$args['title'] = (String) $data['title'];
+		$args['random'] = $data['random'] == 1 ? 1 : 0;
+		$args['testimonial_limit'] = $data['testimonial_limit'] ? (int) $data['testimonial_limit'] : 0;
 		parent::save($args);
 	}
-        
-        public function add() {
-            $this->_setupForm();
-        }
-        
-        public function edit() {
-            $this->_setupForm();
-        }
-        
-        protected function _setupForm() {
-            $tl = new TestimonialsList();            
-            $this->set('testimonial_objs',$tl->get());
-            $this->set('testimonial_ids',$this->_getSelectedTestimonialIDs());
-        }
-        
-        protected function _getSelectedTestimonialIDs() {
-            // Set the testimonial ids
-            $ts = $this->get('testimonials');
-            $ts = unserialize($ts);
-            if(is_array($ts))
-                return $ts;                
-            return array();                
-        }
+
+	public function add() {
+		$this->_setupForm();
+	}
+
+	public function edit() {
+		$this->_setupForm();
+	}
+
+	protected function _setupForm() {
+		$tl = new TestimonialsList();
+		$this->set('testimonial_objs', $tl->get());
+		$this->set('testimonial_ids', $this->_getSelectedTestimonialIDs());
+	}
+
+	protected function _getSelectedTestimonialIDs() {
+		// Set the testimonial ids
+		$ts = $this->get('testimonials');
+		$ts = unserialize($ts);
+		if (is_array($ts))
+			return $ts;
+		return array();
+	}
 
 }
