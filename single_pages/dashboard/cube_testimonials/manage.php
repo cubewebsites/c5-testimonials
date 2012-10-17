@@ -1,7 +1,22 @@
 <?php defined('C5_EXECUTE') or die("Access Denied."); ?>
 
-<?php echo Loader::helper('concrete/dashboard')->getDashboardPaneHeaderWrapper(t('Cube Testimonials'), t('Manage testimonials on your site and perform bulk actions on them.'), false, false);?>
+<h1><span><?php echo t('Cube Testimonials')?></span></h1>
 
-<?php  Loader::packageElement('search_results', 'cube_testimonials' ,array('columns' => $columns, 'searchInstance' => $searchInstance, 'searchType' => 'DASHBOARD', 'testimonials' => $testimonials, 'testimonialList' => $testimonialList, 'pagination' => $pagination)); ?>
+<div class="ccm-dashboard-inner">
 
-<?php echo Loader::helper('concrete/dashboard')->getDashboardPaneFooterWrapper(false); ?>
+	<table id="ccm-search-form-table" >
+		<tr>
+
+			<td valign="top" width="100%">	
+				
+				<div id="ccm-search-advanced-results-wrapper">
+					
+					<div id="ccm-testimonial-search-results">
+
+						<?php  Loader::packageElement('search_results', 'cube_testimonials' ,array('searchInstance' => $searchInstance, 'searchType' => 'DASHBOARD', 'testimonials' => $testimonials, 'testimonialList' => $testimonialList, 'pagination' => $pagination)); ?>
+					</div>
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>

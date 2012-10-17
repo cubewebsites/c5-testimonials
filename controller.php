@@ -3,7 +3,7 @@ defined('C5_EXECUTE') or die("Access Denied.");
 
 class CubeTestimonialsPackage extends Package {
 	protected $pkgHandle            =   'cube_testimonials';
-	protected $appVersionRequired   =   '5.5.0';
+	protected $appVersionRequired   =   '5.4.0';
 	protected $pkgVersion           =   '1.0.2';
 
 

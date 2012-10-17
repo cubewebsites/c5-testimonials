@@ -58,13 +58,10 @@
 		<table border="0" cellspacing="0" cellpadding="0" id="ccm-testimonial-list" class="ccm-results-list">
 		<tr>
 			<th width="1"><input id="ccm-testimonial-list-cb-all" type="checkbox" /></th>
-			<?php  foreach($columns->getColumns() as $col) { ?>
-				<?php  if ($col->isColumnSortable()) { ?>
-					<th class="<?php echo $testimonialList->getSearchResultsClass($col->getColumnKey())?>"><a href="<?php echo $testimonialList->getSortByURL($col->getColumnKey(), $col->getColumnDefaultSortDirection(), $bu, $soargs)?>"><?php echo $col->getColumnName()?></a></th>
-				<?php  } else { ?>
-					<th><?php echo $col->getColumnName()?></th>
-				<?php  } ?>
-			<?php  } ?>
+			<th class="<?php echo $testimonialList->getSearchResultsClass('title')?>"><a href="<?php echo $testimonialList->getSortByURL('title', 'asc', $bu)?>"><?php echo t('Title')?></a></th>
+			<th class="<?php echo $testimonialList->getSearchResultsClass('author')?>"><a href="<?php echo $testimonialList->getSortByURL('author', 'asc', $bu)?>"><?php echo t('Author')?></a></th>
+			<th class="<?php echo $testimonialList->getSearchResultsClass('department')?>"><a href="<?php echo $testimonialList->getSortByURL('department', 'asc', $bu)?>"><?php echo t('Department')?></a></th>
+			<th class="<?php echo $testimonialList->getSearchResultsClass('display_order')?>"><a href="<?php echo $testimonialList->getSortByURL('display_order', 'asc', $bu)?>"><?php echo t('Display Order')?></a></th>			
 
 		</tr>
 	<?php 
@@ -84,17 +81,11 @@
 			?>
 		
 			<tr class="ccm-list-record <?php echo $striped?>">
-			<td class="ccm-testimonial-list-cb" style="vertical-align: middle !important"><input name="tID[]" type="checkbox" value="<?php echo $_t->getTestimonialID() ?>" /></td>
-			<?php  foreach($columns->getColumns() as $col) { ?>                        
-				<?php  if ($col->getColumnKey() == 'title') { ?>
-					<td><a href="<?php echo $action?>"><?php echo $_t->getTitle()?></a></td>
-                               <?php  } elseif ($col->getColumnKey() == 'display_order') { ?>
-                                        <td><input name="tDisplayOrder[<?php echo $_t->getTestimonialID() ?>]" type="text" value="<?php echo $_t->getDisplayOrder() ?>" /></td>
-				<?php  } else { ?>
-					<td><?php echo $col->getColumnValue($_t)?></td>
-				<?php  } ?>
-			<?php  } ?>
-
+			<td class="ccm-testimonial-list-cb" style="vertical-align: middle !important"><input name="tID[]" type="checkbox" value="<?php echo $_t->getTestimonialID() ?>" /></td>			
+			<td><a href="<?php echo $action?>"><?php echo $_t->getTitle()?></a></td>
+			<td><?php echo $_t->getAuthor() ?></td>
+			<td><?php echo $_t->getDepartment() ?></td>
+			<td><input name="tDisplayOrder[<?php echo $_t->getTestimonialID() ?>]" type="text" value="<?php echo $_t->getDisplayOrder() ?>" /></td>				
 			</tr>
 			<?php 
 		}
@@ -126,12 +117,12 @@
 </div>
 
 <div class="ccm-pane-footer">
-	<?php  	$testimonialList->displayPagingV2($bu, false, $soargs); ?>
+	<?php  	$testimonialList->displayPaging($bu, false, $soargs); ?>
 </div>
 
 <?php  } else { ?>
 	<div class="ccm-pane-dialog-pagination">
-		<?php  	$testimonialList->displayPagingV2($bu, false, $soargs); ?>
+		<?php  	$testimonialList->displayPaging($bu, false, $soargs); ?>
 	</div>
 <?php  } ?>
 

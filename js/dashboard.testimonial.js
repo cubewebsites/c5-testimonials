@@ -1,8 +1,7 @@
 ccm_setupTestimonialSearch = function() {
-	$(".chosen-select").chosen();
-
+	
 	$("#ccm-testimonial-list-cb-all").click(function() {
-		if ($(this).prop('checked') == true) {
+		if ($(this).attr('checked') == true) {
 			$('.ccm-list-record td.ccm-testimonial-list-cb input[type=checkbox]').attr('checked', true);
 			$("#ccm-testimonial-list-multiple-operations").attr('disabled', false);
 		} else {
@@ -42,7 +41,7 @@ ccm_setupTestimonialSearch = function() {
 		switch(action) {
 			case 'delete':								
 				// enable the submit button			                                
-                                $('#operate-testimonials').removeAttr('disabled');
+				$('#operate-testimonials').removeAttr('disabled');
 				break;
 			
 			default:

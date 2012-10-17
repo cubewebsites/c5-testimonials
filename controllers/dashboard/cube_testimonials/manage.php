@@ -84,21 +84,14 @@ class DashboardCubeTestimonialsManageController extends Controller {
             
 		$tl =   new TestimonialsList();
 		$tl->setItemsPerPage(20);
-                $sortcolumn     =   $fh->getRequestValue('ccm_order_by') ? $fh->getRequestValue('ccm_order_by') : 'display_order';
-                $sortdir        =   $fh->getRequestValue('ccm_order_dir') ? $fh->getRequestValue('ccm_order_dir') : 'asc';                
-                
-                // Validate the column
-                $columns    =   new TestimonialSearchDefaultColumnSet();
-                $found      =   false;
-                foreach($columns->getSortableColumns() as $col) {
-                    if($col->columnKey==$sortcolumn)
-                        $found=true;
-                }                
-                if(!$found) $sortcolumn = 'display_order';
+        $sortcolumn     =   $fh->getRequestValue('ccm_order_by') ? $fh->getRequestValue('ccm_order_by') : 'display_order';
+        $sortdir        =   $fh->getRequestValue('ccm_order_dir') ? $fh->getRequestValue('ccm_order_dir') : 'asc';                                
+        // Validate the column
+        $sortcolumn = 'display_order';
                 
 		$tl->sortBy($sortcolumn,$sortdir);
-		$columns = TestimonialSearchColumnSet::getCurrent();
-		$this->set('columns', $columns);
+//		$columns = TestimonialSearchColumnSet::getCurrent();
+//		$this->set('columns', $columns);
 
 		// Additional filtering to go here
 		return $tl;

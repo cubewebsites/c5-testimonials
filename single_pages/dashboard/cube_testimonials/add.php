@@ -4,43 +4,43 @@ $th = Loader::helper('text');
 ?>
 
 <?php if($tID): ?>
-<?php echo Loader::helper('concrete/dashboard')->getDashboardPaneHeaderWrapper(t('Edit Testimonial'), false, false, false);?>
+<h1><span><?php echo t('Edit Testimonial')?></span></h1>
 <?php else: ?>
-<?php echo Loader::helper('concrete/dashboard')->getDashboardPaneHeaderWrapper(t('Add Testimonial'), false, false, false);?>
+<h1><span><?php echo t('Add Testimonial')?></span></h1>
 <?php endif ?>
 
+
+	
+	<div class="ccm-dashboard-inner"> 
+	
+	<div class="actions">
+	<span class="required">*</span> - <?php echo t('required field')?>
+	</div>
+
 <form method="post" enctype="multipart/form-data" id="ccm-testimonial-form" action="<?php echo $this->url('/dashboard/cube_testimonials/add')?>">
-
-
-	<div class="ccm-pane-body">
-
-		<table border="0" cellspacing="0" cellpadding="0" width="100%">
-			<thead>
-			<tr>
-				<th colspan="2"><?php echo t('Testimonial Information')?></th>
-			</tr>
-			</thead>
+		<h2><?php echo t('Testimonial Information')?></h2>
+		<div style="margin:0px; padding:0px; width:100%; height:auto" >
+				<table class="entry-form" border="0" cellspacing="1" cellpadding="0">				
 			<tbody>
 			<tr>
-				<td><?php echo t('Title')?> <span class="required">*</span></td>
-				<td><?php echo t('Author')?></td>
-			</tr>
+				<td class="subheader" width="50%"><?php echo t('Title')?> <span class="required">*</span></td>
+				<td class="subheader" width="50%"><?php echo t('Author')?></td>
+			</tr>			
 			<tr>
 				<td><input type="text" name="title" autocomplete="off" value="<?php echo $th->entities($testimonial->getTitle())?>" style="width: 95%"></td>
 				<td><input type="text" autocomplete="off" name="author" value="<?php echo $th->entities($testimonial->getAuthor())?>" style="width: 95%"></td>
 			</tr>
-
 			<tr>
-				<td><?php echo t('Department')?></td>
-				<td><?php echo t('URL')?></td>
-			</tr>
+				<td class="subheader" width="50%"><?php echo t('Department')?></td>
+				<td class="subheader" width="50%"><?php echo t('URL')?></td>
+			</tr>	
 			<tr>
 				<td><input type="text" name="department" autocomplete="off" value="<?php echo $th->entities($testimonial->getDepartment())?>" style="width: 95%"></td>
 				<td><input type="text" autocomplete="off" name="url" value="<?php echo $th->entities($testimonial->getUrl())?>" style="width: 95%"></td>
 			</tr>
 
 			<tr>
-				<td colspan="2"><?php echo t('Testimonial')?> <span class="required">*</span></td>
+				<td class="subheader" colspan="2"><?php echo t('Testimonial')?> <span class="required">*</span></td>
 			</tr>
 			<tr>
 				<td colspan="2"><textarea name="quote" style="width: 95%" cols="=100" rows="5"><?php echo $th->entities($testimonial->getQuote())?></textarea></td>
@@ -51,22 +51,20 @@ $th = Loader::helper('text');
 		</table>
 	</div>
 
-	<div class="ccm-pane-footer">
-		<div class="ccm-buttons">
-			<?php if($tID): ?>
-			<input type="hidden" name="tID" value="<?php echo $tID ?>" />
-			<?php endif ?>
-			<input type="hidden" name="save" value="1" />			
-			<?php  print $ih->submit(t('Save Testimonial'), 'ccm-testimonial-form', 'right', 'primary'); ?>
-			<?php if($testimonial->getID()): ?>
-			<?php  print $ih->submit(t('Delete Testimonial'), 'ccm-testimonial-delete', 'right', 'danger'); ?>
-			<?php endif ?>
-		</div>
+	<div class="ccm-buttons">
+		<?php if($tID): ?>
+		<input type="hidden" name="tID" value="<?php echo $tID ?>" />
+		<?php endif ?>
+		<input type="hidden" name="save" value="1" />			
+		<?php  print $ih->submit(t('Save Testimonial'), 'ccm-testimonial-form', 'right', 'primary'); ?>
+		<?php if($testimonial->getID()): ?>
+		<?php  print $ih->submit(t('Delete Testimonial'), 'ccm-testimonial-delete', 'right', 'danger'); ?>
+		<?php endif ?>
 	</div>
-
+		<div class="ccm-spacer">&nbsp;</div>
 </form>
 
-
+	</div>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#ccm-submit-ccm-testimonial-delete').click(function(){
@@ -74,5 +72,3 @@ $th = Loader::helper('text');
 		});
 	});
 </script>
-
-<?php echo Loader::helper('concrete/dashboard')->getDashboardPaneFooterWrapper(false);?>

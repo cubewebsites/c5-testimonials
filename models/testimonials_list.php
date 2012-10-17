@@ -7,6 +7,7 @@ class TestimonialsList extends DatabaseItemList {
 	public $table   =   'cube_testimonials';
 	public $primary =   'testimonial_id';
 	public $keys    =   array('title','author','department','url','quote','display_order');
+	protected $autoSortColumns = array('title','author','department','display_order');
 
 	/*
 	 * METHODS FOR MANAGING A SINGLE TESTIMONIAL
@@ -84,23 +85,23 @@ class TestimonialsList extends DatabaseItemList {
 	}
 }
 
-class TestimonialSearchDefaultColumnSet extends DatabaseItemListColumnSet {
-	//protected $attributeClass = 'UserAttributeKey';
-public function __construct() {
-		$this->addColumn(new DatabaseItemListColumn('title', t('Title'),'getTitle'));
-		$this->addColumn(new DatabaseItemListColumn('author', t('Author'),  'getAuthor'));
-		$this->addColumn(new DatabaseItemListColumn('department', t('Department'), 'getDepartment'));
-		//$this->addColumn(new DatabaseItemListColumn('quote', t('Quote'), 'getQuote'));
-		$this->addColumn(new DatabaseItemListColumn('display_order', t('Display Order'), 'getDisplayOrder'));
-		$do = $this->getColumnByKey('display_order');
-		$this->setDefaultSortColumn($do, 'desc');
-	}
-}
-
-class TestimonialSearchColumnSet extends DatabaseItemListColumnSet {
-	protected $attributeClass = 'UserAttributeKey';
-	public function getCurrent() {
-		$fldc = new TestimonialSearchDefaultColumnSet();
-		return $fldc;
-	}
-}
+//class TestimonialSearchDefaultColumnSet extends DatabaseItemListColumnSet {
+//	//protected $attributeClass = 'UserAttributeKey';
+//public function __construct() {
+//		$this->addColumn(new DatabaseItemListColumn('title', t('Title'),'getTitle'));
+//		$this->addColumn(new DatabaseItemListColumn('author', t('Author'),  'getAuthor'));
+//		$this->addColumn(new DatabaseItemListColumn('department', t('Department'), 'getDepartment'));
+//		//$this->addColumn(new DatabaseItemListColumn('quote', t('Quote'), 'getQuote'));
+//		$this->addColumn(new DatabaseItemListColumn('display_order', t('Display Order'), 'getDisplayOrder'));
+//		$do = $this->getColumnByKey('display_order');
+//		$this->setDefaultSortColumn($do, 'desc');
+//	}
+//}
+//
+//class TestimonialSearchColumnSet extends DatabaseItemListColumnSet {
+//	protected $attributeClass = 'UserAttributeKey';
+//	public function getCurrent() {
+//		$fldc = new TestimonialSearchDefaultColumnSet();
+//		return $fldc;
+//	}
+//}

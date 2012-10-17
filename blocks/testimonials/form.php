@@ -31,10 +31,11 @@ $form = Loader::helper('form');
 	<br/><br/>
 	
 	<strong><?php echo t('Randomise')?></strong><br/>
-	<?php echo $form->select('random',array(0=>'No',1=>'Yes'),$random) ?>
+	<select class="ccm-input-select" name="random" id="random" ccm-passed-value="<?php echo $random ?>">
+		<?php foreach(array(0=>'No',1=>'Yes') as $k => $v): ?>
+		<option value="<?php echo $k ?>"<?php echo $k==$random?' selected="selected"':'' ?>><?php echo $v ?></option>
+		<?php endforeach ?>
+	</select>	
 	<br/><br/>
 	
-
-	
-
 </div>

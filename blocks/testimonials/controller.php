@@ -9,7 +9,7 @@ class TestimonialsBlockController extends BlockController {
 	protected $btInterfaceHeight = 220;
 	protected $btTable = 'btTestimonials';
 	protected $btCacheBlockRecord = true;
-	protected $btCacheBlockOutput = true;
+	protected $btCacheBlockOutput = false;
 	protected $btCacheBlockOutputOnPost = true;
 	protected $btCacheBlockOutputForRegisteredUsers = false;
 	protected $btExportFileColumns = array('fID');
@@ -25,19 +25,18 @@ class TestimonialsBlockController extends BlockController {
 	public function getBlockTypeName() {
 		return t("Testimonials");
 	}
-
+	
 	public function view() {
 
 		// Set the title
-		$this->set('title', $this->get('title'));
-
+		$this->set('title', $this->title);
 		$tl = new TestimonialsList();
 
 		// Set the order of resultss            
-		$this->get('random') ? $tl->sortBy('RAND()', 'asc') : $tl->sortBy('display_order', 'asc');
+		$this->random ? $tl->sortBy('RAND()', 'asc') : $tl->sortBy('display_order', 'asc');
 
 		// Filter by ID if needed
-		if (!$this->get('show_all')) {
+		if (!$this->show_all) {
 			// Make sure testimonials are selected
 			// If none selected then they are all displayed
 			$ids = $this->_getSelectedTestimonialIDs();
@@ -45,8 +44,9 @@ class TestimonialsBlockController extends BlockController {
 				$tl->filter('testimonial_id', $ids, 'IN');
 		}
 
-		// Set the limit
-		$limit = $this->get('testimonial_limit') ? $this->get('testimonial_limit') : 0;
+		// Set the limit		
+		$limit = $this->testimonial_limit ? $this->testimonial_limit : 0;		
+		
 		$this->set('testimonials', $tl->get($limit));
 	}
 
@@ -76,7 +76,7 @@ class TestimonialsBlockController extends BlockController {
 
 	protected function _getSelectedTestimonialIDs() {
 		// Set the testimonial ids
-		$ts = $this->get('testimonials');
+		$ts = $this->testimonials;
 		$ts = unserialize($ts);
 		if (is_array($ts))
 			return $ts;
