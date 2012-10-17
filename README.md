@@ -20,7 +20,7 @@ When adding a block you can choose specific testimonials to display, or display 
 
 ## Requirements
 
-    Concrete >= 5.5.0
+    Concrete >= 5.4.0.5
 
 ## Installation
 
