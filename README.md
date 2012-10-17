@@ -26,7 +26,7 @@ When adding a block you can choose specific testimonials to display, or display 
 
 1. From the dashboard, go to "Extend Concrete5"
 2. Install Cube Testimonials
-3. (optional) If you want to use the default quote styling, then copy the contents of *quotes.css* into your CSS file.  This CSS is from Twitter Bootstrap.
+3. *optional* If you want to use the default quote styling, then copy the contents of *css/quotes.css* into your CSS file.  This CSS is from Twitter Bootstrap.
 
 You should now have a new section available in the Dashboard called "Cube Testimonials".  When editing a page you'll have the option to add a block called "Testimonials"
 
