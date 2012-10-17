@@ -3,6 +3,10 @@ c5-testimonials
 
 Cube Websites Concrete5 Testimonials Package
 
+## Concrete 5.4.0.5 Users
+I have now created a branch for Concrete 5.4.0.5.
+Please visit https://github.com/cubewebsites/c5-testimonials/tree/concrete5.4 to get it
+
 ## Description
 
 This package allows you to easily create, manage and display testimonials on your Concrete5 powered websites.
