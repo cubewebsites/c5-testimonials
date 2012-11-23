@@ -58,6 +58,7 @@ $th = Loader::helper('text');
 			<?php endif ?>
 			<input type="hidden" name="save" value="1" />			
 			<?php  print $ih->submit(t('Save Testimonial'), 'ccm-testimonial-form', 'right', 'primary'); ?>
+			<?php  print $ih->submit(t('Save &amp; Add Another'), 'ccm-testimonial-add-another', 'right', 'primary'); ?>
 			<?php if($testimonial->getID()): ?>
 			<?php  print $ih->submit(t('Delete Testimonial'), 'ccm-testimonial-delete', 'right', 'danger'); ?>
 			<?php endif ?>

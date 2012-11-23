@@ -63,7 +63,13 @@ class DashboardCubeTestimonialsAddController extends Controller {
 				$testimonial->setData($k,$v);
 						
 			// Save successful
-			if($testimonial->save()) {						
+			if($testimonial->save()) {
+				
+				// See if we need to add another
+				if($fh->getRequestValue('ccm-submit-ccm-testimonial-add-another')) {
+					$this->redirect('/dashboard/cube_testimonials/add?t-saved=1');
+				}				
+				
 				// Redirect to the saved testimonial
 				$this->redirect('/dashboard/cube_testimonials/add?tID=' . $testimonial->getID() . '&t-saved=1');
 			}
