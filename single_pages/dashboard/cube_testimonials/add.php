@@ -14,7 +14,7 @@ $th = Loader::helper('text');
 
 	<div class="ccm-pane-body">
 
-		<table border="0" cellspacing="0" cellpadding="0" width="100%">
+		<table border="0" cellspacing="0" cellpadding="0" width="100%" class="table">
 			<thead>
 			<tr>
 				<th colspan="2"><?php echo t('Testimonial Information')?></th>
