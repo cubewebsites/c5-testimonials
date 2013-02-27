@@ -52,10 +52,11 @@ The package itself does not contain any styling, this is entirely upto you.  How
 
 ## Changelog
 
-*2013-02-27*  
-Caching now disabled so that "Random" display works correctly  
-Added `Testimonial Date` field  
-Can _Save and Add Another_ testimonial  
+*2013-02-27*
+
+1. Caching now disabled so that "Random" display works correctly  
+1.Added `Testimonial Date` field  
+1.Can _Save and Add Another_ testimonial  
 
 2012-08-27 - Initial Release
 
