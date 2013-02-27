@@ -9,8 +9,8 @@ class TestimonialsBlockController extends BlockController {
 	protected $btInterfaceHeight = 220;
 	protected $btTable = 'btTestimonials';
 	protected $btCacheBlockRecord = true;
-	protected $btCacheBlockOutput = true;
-	protected $btCacheBlockOutputOnPost = true;
+	protected $btCacheBlockOutput = false;
+	protected $btCacheBlockOutputOnPost = false;
 	protected $btCacheBlockOutputForRegisteredUsers = false;
 	protected $btExportFileColumns = array('fID');
 	protected $btWrapperClass = 'ccm-ui';
