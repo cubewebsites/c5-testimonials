@@ -50,14 +50,16 @@ class DashboardCubeTestimonialsAddController extends Controller {
 			$department =   $fh->getRequestValue('department');
 			$url        =   $fh->getRequestValue('url');
 			$quote      =   $fh->getRequestValue('quote');
-			
+			$date		=	$fh->getRequestValue('testimonial_date');                        
+			$date		=   date('Y-m-d H:i:s',strtotime($date));			
 			$data   =   array(
-					'title'         =>  $title,
-					'author'        =>  $author,
-					'department'    =>  $department,
-					'url'           =>  $url,
-					'quote'         =>  $quote,
-					'display_order' =>  0
+					'title'				=>  $title,
+					'author'			=>  $author,
+					'department'		=>  $department,
+					'url'				=>  $url,
+					'quote'				=>  $quote,
+					'display_order'		=>  0,
+					'testimonial_date'	=>	$date
 			);
 			foreach($data as $k=>$v)
 				$testimonial->setData($k,$v);

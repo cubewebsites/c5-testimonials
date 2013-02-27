@@ -12,5 +12,8 @@
 		<field name="department" type="C" size="255"></field>
 		<field name="quote" type="X"></field>
 		<field name="url" type="C" size="255"></field>
+		<field name="testimonial_date" type="T">
+			<DEFTIMESTAMP></DEFTIMESTAMP>
+		</field>
 	</table>
 </schema>

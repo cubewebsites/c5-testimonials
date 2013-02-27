@@ -1,6 +1,7 @@
 <?php
 defined('C5_EXECUTE') or die("Access Denied.");
 $th = Loader::helper('text');
+$dh = Loader::helper('form/date_time');
 ?>
 
 <?php if($tID): ?>
@@ -39,6 +40,16 @@ $th = Loader::helper('text');
 				<td><input type="text" autocomplete="off" name="url" value="<?php echo $th->entities($testimonial->getUrl())?>" style="width: 95%"></td>
 			</tr>
 
+			<tr>
+				<td><?php echo t('Date')?></td>
+				<td></td>
+			</tr>
+			<?php echo $testimonial->getDate() ?>
+			<tr>
+				<td><?php echo $dh->date('testimonial_date',$testimonial->getDate()) ?></td>
+				<td></td>
+			</tr>
+			
 			<tr>
 				<td colspan="2"><?php echo t('Testimonial')?> <span class="required">*</span></td>
 			</tr>

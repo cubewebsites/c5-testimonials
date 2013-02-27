@@ -6,7 +6,7 @@ class TestimonialsList extends DatabaseItemList {
 
 	public $table   =   'cube_testimonials';
 	public $primary =   'testimonial_id';
-	public $keys    =   array('title','author','department','url','quote','display_order');
+	public $keys    =   array('title','author','department','url','quote','display_order','testimonial_date');
 
 	/*
 	 * METHODS FOR MANAGING A SINGLE TESTIMONIAL

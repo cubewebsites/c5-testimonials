@@ -23,6 +23,10 @@ class Testimonial extends Cube_Object {
 		return $testimonial;
 	}
 
+	public function getDate() {
+		return $this->getTestimonialDate();
+	}
+	
 	public function getTestimonialID() {
 		return $this->getId();
 	}
