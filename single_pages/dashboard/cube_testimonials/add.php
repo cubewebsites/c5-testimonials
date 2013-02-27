@@ -43,8 +43,7 @@ $dh = Loader::helper('form/date_time');
 			<tr>
 				<td><?php echo t('Date')?></td>
 				<td></td>
-			</tr>
-			<?php echo $testimonial->getDate() ?>
+			</tr>			
 			<tr>
 				<td><?php echo $dh->date('testimonial_date',$testimonial->getDate()) ?></td>
 				<td></td>
