@@ -48,11 +48,11 @@ The above example makes use of the [PHP date](http://php.net/manual/en/function.
 
 ### Markup and Themes
 
-The package itself does not contain any styling, this is entirely upto you.  However, markup used is compatible with Twitter Bootstrap so if you're using that then you'll get some nice styling to get you started.
+The package itself does not contain any styling, this is entirely upto you.  However, the markup used is compatible with Twitter Bootstrap so if you have that then you'll get some nice styling to get you started.
 
 ## Changelog
 
-*2013-02-27* 
+*2013-02-27*  
 Caching now disabled so that "Random" display works correctly  
 Added `Testimonial Date` field  
 Can _Save and Add Another_ testimonial  
