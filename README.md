@@ -52,6 +52,10 @@ The package itself does not contain any styling, this is entirely upto you.  How
 
 ## Changelog
 
+*2013-03-02*
+
+1. Fixed bug which was causing websites to load very slowly
+
 *2013-02-27*
 
 1. Caching now disabled so that "Random" display works correctly  
