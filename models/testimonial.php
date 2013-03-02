@@ -6,15 +6,14 @@ Loader::model('testimonials_list','cube_testimonials');
 class Testimonial extends Cube_Object {
 
 	protected$_table   =   'cube_testimonials';
-	//protected $_idFieldName = 'testimonial_id';
-	
-	const primary =   'testimonial_id';
+	protected $_primaryKey = 'testimonial_id';
 	
 	public static function getByTestimonialID($tID) {		
 		$testimonial    =   new Testimonial();		
 		$db     =   Loader::db();
-		$qry    =   "SELECT * FROM ". $testimonial->getTableName() ." WHERE ".$testimonial->getIdFieldName()."=?";
-		$row	=	 $db->GetRow($qry,array($tID));		
+		$qry    =   "SELECT * FROM ". $testimonial->getTableName() ." WHERE ". $testimonial->getIdFieldName() ."=?";
+		                
+                $row	=	 $db->GetRow($qry,array($tID));		
 		
 		if(!$row)
 			return $testimonial;
