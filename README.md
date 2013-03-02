@@ -54,13 +54,13 @@ The package itself does not contain any styling, this is entirely upto you.  How
 
 *2013-03-02*
 
-1. Fixed bug which was causing websites to load very slowly
+1.  Fixed bug which was causing websites to load very slowly
 
 *2013-02-27*
 
-1. Caching now disabled so that "Random" display works correctly  
-1.Added `Testimonial Date` field  
-1.Can _Save and Add Another_ testimonial  
+1.  Caching now disabled so that "Random" display works correctly  
+1.  Added `Testimonial Date` field  
+1.  Can _Save and Add Another_ testimonial  
 
 2012-08-27 - Initial Release
 
