@@ -52,6 +52,10 @@ The package itself does not contain any styling, this is entirely upto you.  How
 
 ## Changelog
 
+*1.0.5*
+
+1. Display order preserved when updating a single testimonial
+
 *2013-03-02*
 
 1.  Fixed bug which was causing websites to load very slowly
