@@ -58,7 +58,7 @@ class DashboardCubeTestimonialsAddController extends Controller {
 					'department'		=>  $department,
 					'url'				=>  $url,
 					'quote'				=>  $quote,
-					'display_order'		=>  0,
+					'display_order'		=>  $testimonial->getDisplayOrder() ? $testimonial->getDisplayOrder() : 0,
 					'testimonial_date'	=>	$date
 			);
 			foreach($data as $k=>$v)

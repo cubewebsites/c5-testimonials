@@ -33,7 +33,7 @@ class TestimonialsBlockController extends BlockController {
 
 		$tl = new TestimonialsList();
 
-		// Set the order of resultss            
+		// Set the order of results
 		$this->get('random') ? $tl->sortBy('RAND()', 'asc') : $tl->sortBy('display_order', 'asc');
 
 		// Filter by ID if needed
