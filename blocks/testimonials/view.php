@@ -19,19 +19,19 @@ $th = Loader::helper('text');
                         <?php if($t->getUrl()): ?>
                         <a href="<?php echo $t->getUrl() ?>">
                         <?php endif ?>
-                        
+
                         <?php echo $th->sanitize($t->getAuthor()) ?>
-                        
+
                         <?php if($t->getUrl()): ?>
                         </a>
-                        <?php endif ?>                       
-                                             
+                        <?php endif ?>
+
                         <?php if($t->getDepartment()):?>
                         <br /><?php echo $th->sanitize($t->getDepartment()) ?>
                         <?php endif ?>
                     </small>
                     <?php endif ?>
-                </blockquote>                
+                </blockquote>
             </div>
         <?php endforeach ?>
         </div>

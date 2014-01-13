@@ -3,84 +3,91 @@
 defined('C5_EXECUTE') or die("Access Denied.");
 Loader::model('testimonials_list', 'cube_testimonials');
 
-class TestimonialsBlockController extends BlockController {
+class TestimonialsBlockController extends BlockController
+{
+    protected $btInterfaceWidth = 320;
+    protected $btInterfaceHeight = 220;
+    protected $btTable = 'btTestimonials';
+    protected $btCacheBlockRecord = true;
+    protected $btCacheBlockOutput = false;
+    protected $btCacheBlockOutputOnPost = false;
+    protected $btCacheBlockOutputForRegisteredUsers = false;
+    protected $btExportFileColumns = array('fID');
+    protected $btWrapperClass = 'ccm-ui';
 
-	protected $btInterfaceWidth = 320;
-	protected $btInterfaceHeight = 220;
-	protected $btTable = 'btTestimonials';
-	protected $btCacheBlockRecord = true;
-	protected $btCacheBlockOutput = false;
-	protected $btCacheBlockOutputOnPost = false;
-	protected $btCacheBlockOutputForRegisteredUsers = false;
-	protected $btExportFileColumns = array('fID');
-	protected $btWrapperClass = 'ccm-ui';
+    /**
+     * Used for localization. If we want to localize the name/description we have to include this
+     */
+    public function getBlockTypeDescription()
+    {
+        return t("Displays testimonials.  Allows specific testimonials, or all testimonials to be displayed");
+    }
 
-	/**
-	 * Used for localization. If we want to localize the name/description we have to include this
-	 */
-	public function getBlockTypeDescription() {
-		return t("Displays testimonials.  Allows specific testimonials, or all testimonials to be displayed");
-	}
+    public function getBlockTypeName()
+    {
+        return t("Testimonials");
+    }
 
-	public function getBlockTypeName() {
-		return t("Testimonials");
-	}
+    public function view()
+    {
+        // Set the title
+        $this->set('title', $this->get('title'));
 
-	public function view() {
+        $tl = new TestimonialsList();
 
-		// Set the title
-		$this->set('title', $this->get('title'));
+        // Set the order of results
+        $this->get('random') ? $tl->sortBy('RAND()', 'asc') : $tl->sortBy('display_order', 'asc');
 
-		$tl = new TestimonialsList();
+        // Filter by ID if needed
+        if (!$this->get('show_all')) {
+            // Make sure testimonials are selected
+            // If none selected then they are all displayed
+            $ids = $this->_getSelectedTestimonialIDs();
+            if (count($ids))
+                $tl->filter('testimonial_id', $ids, 'IN');
+        }
 
-		// Set the order of results
-		$this->get('random') ? $tl->sortBy('RAND()', 'asc') : $tl->sortBy('display_order', 'asc');
+        // Set the limit
+        $limit = $this->get('testimonial_limit') ? $this->get('testimonial_limit') : 0;
+        $this->set('testimonials', $tl->get($limit));
+    }
 
-		// Filter by ID if needed
-		if (!$this->get('show_all')) {
-			// Make sure testimonials are selected
-			// If none selected then they are all displayed
-			$ids = $this->_getSelectedTestimonialIDs();
-			if (count($ids))
-				$tl->filter('testimonial_id', $ids, 'IN');
-		}
+    public function save($data)
+    {
+        $args['show_all'] = $data['show_all'] == 1 ? 1 : 0;
+        $args['testimonials'] = is_array($data['testimonials']) ? $data['testimonials'] : array();
+        $args['testimonials'] = serialize($args['testimonials']);
+        $args['title'] = (String) $data['title'];
+        $args['random'] = $data['random'] == 1 ? 1 : 0;
+        $args['testimonial_limit'] = $data['testimonial_limit'] ? (int) $data['testimonial_limit'] : 0;
+        parent::save($args);
+    }
 
-		// Set the limit
-		$limit = $this->get('testimonial_limit') ? $this->get('testimonial_limit') : 0;
-		$this->set('testimonials', $tl->get($limit));
-	}
+    public function add()
+    {
+        $this->_setupForm();
+    }
 
-	public function save($data) {
-		$args['show_all'] = $data['show_all'] == 1 ? 1 : 0;
-		$args['testimonials'] = is_array($data['testimonials']) ? $data['testimonials'] : array();
-		$args['testimonials'] = serialize($args['testimonials']);
-		$args['title'] = (String) $data['title'];
-		$args['random'] = $data['random'] == 1 ? 1 : 0;
-		$args['testimonial_limit'] = $data['testimonial_limit'] ? (int) $data['testimonial_limit'] : 0;
-		parent::save($args);
-	}
+    public function edit()
+    {
+        $this->_setupForm();
+    }
 
-	public function add() {
-		$this->_setupForm();
-	}
+    protected function _setupForm()
+    {
+        $tl = new TestimonialsList();
+        $this->set('testimonial_objs', $tl->get());
+        $this->set('testimonial_ids', $this->_getSelectedTestimonialIDs());
+    }
 
-	public function edit() {
-		$this->_setupForm();
-	}
-
-	protected function _setupForm() {
-		$tl = new TestimonialsList();
-		$this->set('testimonial_objs', $tl->get());
-		$this->set('testimonial_ids', $this->_getSelectedTestimonialIDs());
-	}
-
-	protected function _getSelectedTestimonialIDs() {
-		// Set the testimonial ids
-		$ts = $this->get('testimonials');
-		$ts = unserialize($ts);
-		if (is_array($ts))
-			return $ts;
-		return array();
-	}
+    protected function _getSelectedTestimonialIDs()
+    {
+        // Set the testimonial ids
+        $ts = $this->get('testimonials');
+        $ts = unserialize($ts);
+        if (is_array($ts))
+            return $ts;
+        return array();
+    }
 
 }

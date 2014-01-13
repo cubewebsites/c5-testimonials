@@ -4,4 +4,4 @@
 
 <?php  Loader::packageElement('search_results', 'cube_testimonials' ,array('columns' => $columns, 'searchInstance' => $searchInstance, 'searchType' => 'DASHBOARD', 'testimonials' => $testimonials, 'testimonialList' => $testimonialList, 'pagination' => $pagination)); ?>
 
-<?php echo Loader::helper('concrete/dashboard')->getDashboardPaneFooterWrapper(false); ?>
+<?php echo Loader::helper('concrete/dashboard')->getDashboardPaneFooterWrapper(false);
