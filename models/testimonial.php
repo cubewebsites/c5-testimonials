@@ -32,7 +32,8 @@ class Testimonial extends Cube_Object {
 	
 	protected function _validate() {		
 		if(!$this->getTitle())	$this->addError(t('Please enter a title'),'title');
-		if(!$this->getQuote())	$this->addError(t('Please enter a testimonial'),'testimonial');	
+		if(!$this->getQuote())	$this->addError(t('Please enter a testimonial'),'testimonial');
+		if(!$this->getTestimonialDate())	$this->addError(t('Please enter a date'),'testimonial_date');
 	}
 
 	

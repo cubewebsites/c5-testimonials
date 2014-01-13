@@ -51,7 +51,8 @@ class DashboardCubeTestimonialsAddController extends Controller {
 			$url        =   $fh->getRequestValue('url');
 			$quote      =   $fh->getRequestValue('quote');
 			$date		=	$fh->getRequestValue('testimonial_date');                        
-			$date		=   date('Y-m-d H:i:s',strtotime($date));			
+			$date		=   $date ? date('Y-m-d H:i:s',strtotime($date)) : null;
+
 			$data   =   array(
 					'title'				=>  $title,
 					'author'			=>  $author,
