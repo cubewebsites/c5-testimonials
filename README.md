@@ -52,6 +52,10 @@ The package itself does not contain any styling, this is entirely upto you.  How
 
 ## Changelog
 
+*1.0.6*
+
+1. Date is now a required field to prevent save errors
+
 *1.0.5*
 
 1. Display order preserved when updating a single testimonial
